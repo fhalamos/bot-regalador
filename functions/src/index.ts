@@ -9,7 +9,7 @@ const app = express()
 
 app.get('/', (req, res) => {
   functions.logger.info('Hello logs!', { structuredData: true })
-  res.status(200).send('Hello world!!!!')
+  res.status(200).send('Hello world!')
 })
 
 app.get('/health', (req, res) => {
@@ -18,19 +18,7 @@ app.get('/health', (req, res) => {
 })
 
 
-app.get('/test-db', async (req, res) => {
-  try {
-    const entry = db.collection('entries').doc()
-    const entryObject = {
-      hola: 'mundo2',
-    }
-    await entry.set(entryObject)
-    res.status(200).send({ message: 'OK' })
-  } catch (error: any) {
-    res.status(500).json(error.message)
-  }
-})
-
+// for now its a GET rather than POST just to make it easier to test on chrome
 app.get('/entries', addEntry)
 
 exports.app = functions.https.onRequest(app)

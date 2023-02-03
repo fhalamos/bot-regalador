@@ -1,11 +1,14 @@
 import * as admin from 'firebase-admin'
-import * as functions from 'firebase-functions'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
 
 admin.initializeApp({
   credential: admin.credential.cert({
-    privateKey: functions.config().private.key.replace(/\\n/g, '\n'),
-    projectId: functions.config().project.id,
-    clientEmail: functions.config().client.email
+    privateKey: process.env.FS_PRIVATE_KEY,
+    projectId: process.env.FS_PROJECT_ID,
+    clientEmail: process.env.FS_CLIENT_EMAIL
   }),
   databaseURL: 'https://bot-regalador.firebaseio.com'
 })
