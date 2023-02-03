@@ -12,9 +12,10 @@ type Request = {
 }
 
 const addEntry = async (req: Request, res: Response) => {
-  // const { title, text } = req.body
-  const title = "title!"
-  const text = "text!"
+  let { title, text } = req.body
+  title = (typeof title === 'undefined') ? 'default_title' : title;
+  text = (typeof text === 'undefined') ? 'default_text' : text;
+
   try {
     const entry = db.collection('entries').doc()
     const entryObject = {

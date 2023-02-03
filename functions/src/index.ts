@@ -18,9 +18,7 @@ app.get('/health', (req, res) => {
 })
 
 
-// for now its a GET rather than POST just to make it easier to test on chrome
-// app.get('/entries', addEntry)
-
+app.post('/entries', addEntry)
 app.get('/entries', getAllEntries)
 
 
