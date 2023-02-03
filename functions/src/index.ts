@@ -1,8 +1,8 @@
 import * as functions from "firebase-functions";
 import * as express from 'express'
 
-import { db } from './config/firebase'
-import { addEntry } from './entryController'
+
+import { addEntry, getAllEntries } from './entryController'
 
 
 const app = express()
@@ -19,6 +19,9 @@ app.get('/health', (req, res) => {
 
 
 // for now its a GET rather than POST just to make it easier to test on chrome
-app.get('/entries', addEntry)
+// app.get('/entries', addEntry)
+
+app.get('/entries', getAllEntries)
+
 
 exports.app = functions.https.onRequest(app)
