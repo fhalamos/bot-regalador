@@ -1,4 +1,3 @@
-import * as functions from "firebase-functions";
 import { Response } from 'express'
 import { db } from './config/firebase'
 
@@ -46,7 +45,7 @@ const getAllEntries = async (req: Request, res: Response) => {
     const querySnapshot = await db.collection('entries').get()
     querySnapshot.forEach((doc: any) => allEntries.push(doc.data()))
     return res.status(200).json(allEntries)
-  } catch(error) { return res.status(500).json(error.message) }
+  } catch(e) { return res.status(500).json((e as Error).message) }
 }
 
 const getEntry = async (req: Request, res: Response) => {
@@ -73,7 +72,7 @@ const getEntry = async (req: Request, res: Response) => {
       data: entryData
     })
   }
-  catch(error) { return res.status(500).json(error.message) }
+  catch(e) { return res.status(500).json((e as Error).message) }
 }
 
 
@@ -113,7 +112,7 @@ const updateEntry = async (req: Request, res: Response) => {
       data: entryObject
     })
   }
-  catch(error) { return res.status(500).json(error.message) }
+  catch(e) { return res.status(500).json((e as Error).message) }
 }
 
 
@@ -151,7 +150,7 @@ const deleteEntry = async (req: Request, res: Response) => {
       entry_id: entryId
     })
   }
-  catch(error) { return res.status(500).json(error.message) }
+  catch(e) { return res.status(500).json((e as Error).message) }
 }
 
 export { addEntry, getEntry, getAllEntries, updateEntry, deleteEntry }
